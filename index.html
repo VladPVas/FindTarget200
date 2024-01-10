@@ -6,9 +6,16 @@
 	<title>Document</title>
 </head>
 <body>
-	
+	<div>
+    <div id="ta"></div>
+    <button id="btn">Find 200</button>
+  </div>
 </body>
 <script>
+
+const ta = document.getElementById('ta')
+const btn = document.getElementById('btn')
+let result = []
 
 function findEquation(target) {
   const operands = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
@@ -17,7 +24,7 @@ function findEquation(target) {
   function generateEquation(currentIndex, currentExpression) {
     if (currentIndex === operands.length) {
       if (eval(currentExpression) === target) {
-        console.log(currentExpression + '=' + target);
+        result.push((currentExpression + '=' + target));
       }
       return;
     }
@@ -31,7 +38,11 @@ function findEquation(target) {
   generateEquation(1, operands[0].toString());
 }
 
-findEquation(200);
-
+btn.addEventListener('click', () => {
+  findEquation(200)
+  ta.innerText = result.reduce((prev, init) => {
+    return prev + '\n' + init
+  })
+})
 </script>
 </html>
